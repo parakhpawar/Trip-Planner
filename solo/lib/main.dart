@@ -26,9 +26,15 @@ class TextFieldExample extends StatefulWidget {
  State<TextFieldExample> createState() => _TextFieldExampleState();
 }
 
-class TextFieldState extends State<TextFieldExample>{
+class _TextFieldExampleState extends State<TextFieldExample>{
+  final _controllerlocation = TextEditingController();
+  final _controllerdays = TextEditingController();
 
-   @override
+  String location ='';
+  String days ='';
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -38,18 +44,35 @@ class TextFieldState extends State<TextFieldExample>{
       ),
       body:Column(
         children: <Widget>[
-          Container( child:TextField(),
+          Container( 
+             padding: EdgeInsets.all(10.0),
+            child:TextField(
+              controller: _controllerlocation,
+            ),
           ),
-           Container( child:TextField(),
+           Container(
+             padding: EdgeInsets.all(10.0),
+            child:TextField(
+              controller: _controllerdays,
+            ),
           ),
-          Container( child: ButtonBar(
-            color:Colors.blue,
-            textColor:Colors.white,
+          Container( 
+            padding: EdgeInsets.all(10.0),
+            child: ElevatedButton(
+              onPressed : (){
+                setState((){
+                  location = _controllerlocation.text;
+                  days = _controllerdays.text;
+                },);
+              },
+              
+            // color:Colors.blue,
+            // textColor:Colors.white,
             child : Text("Generate Iteniary"),
           ),
           ),
           Text(
-            "Location mentioned:",
+            "Location mentioned: $location",
             style: TextStyle(
               fontWeight:FontWeight.bold,
               fontSize: 18.0,
@@ -58,7 +81,7 @@ class TextFieldState extends State<TextFieldExample>{
           ),
 
            Text(
-            "Number of days: ",
+            "Number of days: $days",
             style: TextStyle(
               fontWeight:FontWeight.bold,
               fontSize: 18.0,
@@ -74,3 +97,8 @@ class TextFieldState extends State<TextFieldExample>{
 }
 
 }
+
+
+
+
+
